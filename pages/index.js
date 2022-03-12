@@ -28,6 +28,21 @@ export default function Home() {
 
   }
 
+  const obtenerListadoJugadores = () => {
+
+    return jugadores.map((jugador, index) => {
+      return (
+        <div className={styles.card} key={`card-jugador-${index}`}>
+          <h2><mark>{jugador.nickName}</mark></h2>
+          <Image className={styles.img} src={obtenerImagen(jugador.clase)} width={442} height={705} about='Imagen del jugador' />
+          <p><strong>Nivel:</strong> {jugador.nivel}</p>
+          <p><strong>Poder:</strong> {jugador.poder}</p>
+        </div>
+      )
+    });
+
+  }
+
 
   useEffect(() => {
     obtenerJugadores()
@@ -56,18 +71,8 @@ export default function Home() {
 
         <div className={styles.grid}>
           {
-            jugadores.map((jugador, index) => {
-              return (
-                <div className={styles.card} key={`card-jugador-${index}`}>
-                  <h2><mark>{jugador.nickName}</mark></h2>
-                  <Image className={styles.img} src={obtenerImagen(jugador.clase)} width={442} height={705} about='Imagen del jugador' />
-                  <p><strong>Nivel:</strong> {jugador.nivel}</p>
-                  <p><strong>Poder:</strong> {jugador.poder}</p>
-                </div>
-              )
-            })
+            loadingJugadores ? <div>Cargando jugadores...</div> : obtenerListadoJugadores()
           }
-
         </div>
       </main >
 
