@@ -9,6 +9,7 @@ export default function Home() {
 
   const [jugadores, setJugadores] = useState([]);
   const [loadingJugadores, setLoadingJugadores] = useState(true);
+  const [labelInformativo, setLabelInformativo] = useState('Cargando jugadores...');
 
   const obtenerImagen = (clase) => {
 
@@ -28,30 +29,12 @@ export default function Home() {
 
   }
 
-  const obtenerListadoJugadores = () => {
-
-    return jugadores.map((jugador, index) => {
-      return (
-        <div className={styles.card} key={`card-jugador-${index}`}>
-          <h2><mark>{jugador.nickName}</mark></h2>
-          <Image className={styles.img} src={obtenerImagen(jugador.clase)} width={442} height={705} about='Imagen del jugador' />
-          <p><strong>Nivel:</strong> {jugador.nivel}</p>
-          <p><strong>Poder:</strong> {jugador.poder}</p>
-        </div>
-      )
-    });
-
-  }
-
-
   useEffect(() => {
+
     obtenerJugadores()
       .then(res => {
+        console.log({ res });
         setJugadores(res);
-        setLoadingJugadores(false);
-      })
-      .catch(err => {
-
       });
 
   }, []);
@@ -71,7 +54,16 @@ export default function Home() {
 
         <div className={styles.grid}>
           {
-            loadingJugadores ? <div>Cargando jugadores...</div> : obtenerListadoJugadores()
+            jugadores.map((jugador, index) => {
+              return (
+                <div className={styles.card} key={`card-jugador-${index}`}>
+                  <h2><mark>{jugador.nickName}</mark></h2>
+                  <Image className={styles.img} src={obtenerImagen(jugador.clase)} width={442} height={705} about='Imagen del jugador' />
+                  <p><strong>Nivel:</strong> {jugador.nivel}</p>
+                  <p><strong>Poder:</strong> {jugador.poder}</p>
+                </div>
+              )
+            })
           }
         </div>
       </main >
