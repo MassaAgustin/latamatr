@@ -1,8 +1,46 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import { useEffect, useState } from 'react';
+
+import { obtenerJugadores } from './servicios/mir4';
 
 export default function Home() {
+
+  const [jugadores, setJugadores] = useState([]);
+  const [loadingJugadores, setLoadingJugadores] = useState(true);
+
+  const obtenerImagen = (clase) => {
+
+    switch (clase) {
+      case "Ballestera":
+        return '/crossbow.webp';
+      case "Taoista":
+        return '/conjurer.png';
+      case "Guerrero":
+        return '/warrior.png';
+      case "Lancero":
+        return '/hunter.png';
+      case "Mago":
+      default:
+        return '/mage.png';
+    }
+
+  }
+
+
+  useEffect(() => {
+    obtenerJugadores()
+      .then(res => {
+        setJugadores(res);
+        setLoadingJugadores(false);
+      })
+      .catch(err => {
+
+      });
+
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,13 +51,26 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenidos a <a href="https://discord.gg/zsUeYZWDrU">LATAM ATR</a>
+          Unanse a nuestro<a href="https://discord.gg/zsUeYZWDrU"> Discord</a>
         </h1>
 
         <div className={styles.grid}>
+          {
+            jugadores.map(jugador => {
+              return (
+
+                <div className={styles.card}>
+                  <h2><mark>{jugador.nickName}</mark></h2>
+                  <Image className={styles.img} src={obtenerImagen(jugador.clase)} width={442} height={705} about='Imagen del jugador' />
+                  <p><strong>Nivel:</strong> {jugador.nivel}</p>
+                  <p><strong>Poder:</strong> {jugador.poder}</p>
+                </div>
+              )
+            })
+          }
 
         </div>
-      </main>
+      </main >
 
       <footer className={styles.footer}>
         <a
@@ -32,6 +83,6 @@ export default function Home() {
           </span>
         </a>
       </footer>
-    </div>
+    </div >
   )
 }
