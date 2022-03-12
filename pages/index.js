@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 
-import { obtenerJugadores } from './servicios/mir4';
+import { obtenerJugadores } from '../lib/servicios/mir4';
 
 export default function Home() {
 
