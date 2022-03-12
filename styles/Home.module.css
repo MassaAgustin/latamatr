@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 800px;
+  min-width: 80%;
 }
 
 .card {
@@ -133,6 +133,6 @@
 @media (max-width: 600px) {
   .grid {
     width: 100%;
-    flex-direction: column;
+    flex-direction:column;
   }
 }
