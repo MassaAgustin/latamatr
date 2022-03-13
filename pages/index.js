@@ -40,7 +40,7 @@ export default function Home() {
         <div className={styles.grid}>
           {
             jugadores.map((jugador, index) => {
-              return <CartaJugador jugador={jugador} index={index} />
+              return <CartaJugador jugador={jugador} index={index} key={`card-jugador-${index}`} />
             })
           }
         </div>
@@ -51,6 +51,7 @@ export default function Home() {
           href="https://mir4global.com/"
           target="_blank"
           rel="noopener noreferrer"
+          key="link-mi4"
         >
           <span className={styles.logo}>
             <Image src="/mir4icon.png" alt="Mir4 Logo" width={86} height={86} />
@@ -60,6 +61,7 @@ export default function Home() {
           href="https://discord.gg/zsUeYZWDrU"
           target="_blank"
           rel="noopener noreferrer"
+          key="link-discord"
         >
           <span className={styles.logo}>
             <Image src="/discord.png" alt="Discord Logo" width={86} height={86} />

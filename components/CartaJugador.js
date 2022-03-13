@@ -24,7 +24,7 @@ export default function CartaJugador(props) {
     }
 
     return (
-        <div className={styles.card} key={`card-jugador-${index}`}>
+        <div className={styles.card}>
             <h2><mark>{jugador.nickName}</mark></h2>
             <Image src={obtenerImagen(jugador.clase)} width={442} height={705} alt='Imagen del jugador' ></Image>
             <p><strong>Nivel:</strong> {jugador.nivel}</p>
