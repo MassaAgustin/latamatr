@@ -33,7 +33,3 @@ export default function CartaJugador(props) {
     );
 }
 
-CartaJugador.getInitialProps = async () => {
-    return obtenerJugador();
-}
-
