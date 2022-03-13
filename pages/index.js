@@ -37,7 +37,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.grid} /* onDoubleClick={dbClickJugador} */>
+        <div className={styles.grid}>
           {
             jugadores.map((jugador, index) => {
               return <CartaJugador jugador={jugador} index={index} />
