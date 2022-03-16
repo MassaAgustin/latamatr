@@ -21,9 +21,9 @@ export default function Home() {
 
   useEffect(() => {
 
-    obtenerJugadores()
-      .then(res => {
-        setJugadores(res);
+    obtenerJugadores({ page: 1, limit: 5 })
+      .then(({ jugadores }) => {
+        setJugadores(jugadores);
       });
 
   }, []);
