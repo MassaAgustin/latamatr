@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    obtenerJugadores({ page: 1, limit: 5 })
+    obtenerJugadores({ page: 1, limit: 10 })
       .then(({ jugadores }) => {
         setJugadores(jugadores);
       });
