@@ -10,10 +10,10 @@ import { obtenerJugadores } from '../lib/servicios/mir4';
 export default function Home() {
 
   const [jugadores, setJugadores] = useState([]);
-  const [loadingJugadores, setLoadingJugadores] = useState(true);
-  const [labelInformativo, setLabelInformativo] = useState('Cargando jugadores...');
+  //const [loadingJugadores, setLoadingJugadores] = useState(true);
+  //const [labelInformativo, setLabelInformativo] = useState('Cargando jugadores...');
 
-  const router = useRouter();
+  //const router = useRouter();
 
   /* function dbClickJugador(e) {
     router.push('/jugador');
