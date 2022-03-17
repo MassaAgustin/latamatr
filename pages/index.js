@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Paginador from '../components/Paginador';
 import CartaJugador from '../components/CartaJugador';
 
 import { obtenerJugadores } from '../lib/servicios/mir4';
@@ -10,23 +11,35 @@ import { obtenerJugadores } from '../lib/servicios/mir4';
 export default function Home() {
 
   const [jugadores, setJugadores] = useState([]);
-  //const [loadingJugadores, setLoadingJugadores] = useState(true);
-  //const [labelInformativo, setLabelInformativo] = useState('Cargando jugadores...');
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [hasPrevPage, setHasPrevPage] = useState(false);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
-  //const router = useRouter();
+  const handleNextPage = () => {
+    setPage(page + 1);
+  }
 
-  /* function dbClickJugador(e) {
-    router.push('/jugador');
-  } */
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  }
+
+  const handleRequestJugadores = async () => {
+    obtenerJugadores({ page, limit })
+      .then(({ jugadores, hasPrevPage, hasNextPage }) => {
+        setJugadores(jugadores);
+        setHasPrevPage(hasPrevPage);
+        setHasNextPage(hasNextPage);
+      });
+  }
+
+  const handleClickPaginador = (arrowLeft) => {
+    arrowLeft ? handlePrevPage() : handleNextPage();
+  }
 
   useEffect(() => {
-
-    obtenerJugadores({ page: 1, limit: 10 })
-      .then(({ jugadores }) => {
-        setJugadores(jugadores);
-      });
-
-  }, []);
+    handleRequestJugadores();
+  }, [page]);
 
   return (
     <div className={styles.container}>
@@ -36,6 +49,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Paginador onClick={handleClickPaginador} hasPrevPage={hasPrevPage} hasNextPage={hasNextPage} />
       <main className={styles.main}>
         <div className={styles.grid}>
           {

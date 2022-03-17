@@ -4,7 +4,7 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 2rem 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -19,8 +19,6 @@
   justify-content: center;
   align-items: center;
 }
-
-
 
 .footer a {
   display: flex;
@@ -71,7 +69,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  min-width: 80%;
+  width: 80vw;
 }
 
 .card {
@@ -85,7 +83,7 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 300px;
+  width: 16rem;
   height: 25rem;
 }
 
@@ -94,10 +92,11 @@
 .card:active {
   color: #0070f3;
   border-color: #0070f3;
+  cursor: pointer;
 }
 
 .card h2 {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -136,9 +135,60 @@
   margin-left: 0.5rem;
 }
 
+.btnPaginador {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.svgPaginador {
+  padding: 5px;
+}
+
+.paginador {
+  display: relative;
+}
+
+.arrow {
+  position: relative;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 90px;
+}
+
+.right {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+}
+
+.left {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+}
+
+.polyline {
+  transition: all 100ms ease-in-out;
+}
+
+.polyline:hover,
+.polyline:focus {
+  stroke-width: 3;
+}
+
+.polyline:active {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
-    flex-direction:column;
+    flex-direction: column;
   }
 }
