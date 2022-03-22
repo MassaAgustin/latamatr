@@ -1,5 +1,27 @@
 .container {
   padding: 0 2rem;
+
+  --primColor: #dcdcdc;
+  --secoColor: #555555;
+  --cornerRad: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
+}
+
+.container input::-webkit-outer-spin-button,
+.container input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.menu input::-webkit-calendar-picker-indicator {
+  background-color: inherit;
+}
+
+.container input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
 }
 
 .main {
@@ -122,6 +144,7 @@
 
 .card img {
   object-fit: contain;
+  -webkit-user-drag: none;
   transition: filter 300ms ease-in-out;
   filter: grayscale(100%) brightness(50%) contrast(90%) blur(4px);
 }
@@ -146,13 +169,24 @@
   padding: 5px;
 }
 
+.path {
+  transition: all 100ms ease-in-out;
+}
+
+.btnClickeable {
+  cursor: pointer;
+}
+
+.btnUnClickeable {
+  cursor: default;
+}
+
 .paginador {
   display: relative;
 }
 
 .arrow {
   position: relative;
-  cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -186,9 +220,143 @@
   transition: all 100ms ease-in-out;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  background-color: #fff;
+  padding: 20px;
+  top: 2%;
+  transition: 0.5s;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  font-family: "Open Sans", Verdana, Geneva, Tahoma, sans-serif;
+  z-index: 1;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+  width: 0;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.nav input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.nav input:checked ~ .menu {
+  width: 90vw;
+}
+
+.menu li {
+  list-style: none;
+  margin: 0 10px;
+}
+
+.menu li {
+  text-decoration: none;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.menu li:hover {
+  color: #161919;
+}
+
+.nav input[type="checkbox"] {
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+
+.nav span {
+  position: absolute;
+  left: 30px;
+  width: 30px;
+  height: 4px;
+  border-radius: 50px;
+  background-color: #666;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.nav input:checked ~ span {
+  background-color: #f974a1;
+}
+
+.nav span:nth-child(2) {
+  transform: translateY(-8px);
+}
+
+.nav input:checked ~ span:nth-child(2) {
+  transform: translateY(0) rotate(-45deg);
+}
+.nav span:nth-child(3) {
+  transform: translateY(8px);
+}
+
+.nav input:checked ~ span:nth-child(3) {
+  transform: translateY(0) rotate(45deg);
+}
+
+.menu input,
+.btnGroup button {
+  border-radius: 1.125rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  height: 100%;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.menu input {
+  color: black;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+}
+
+.btnGroup button {
+  cursor: pointer;
+  background: #ffc107;
+  padding: 1rem 3rem;
+  color: white;
+  transition: transform 200ms ease-in-out;
+}
+
+.btnGroup button:hover,
+.btnGroup button:focus {
+  transform: scale(1.05);
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  justify-self: end;
+}
+
 @media (max-width: 600px) {
   .grid {
-    width: 100%;
+    width: 100vw;
     flex-direction: column;
+  }
+
+  .nav {
+    display: none;
   }
 }

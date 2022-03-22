@@ -9,7 +9,7 @@ export default function ArrowLeft({ onClick, hasPrevPage }) {
     }
 
     const handleMouseEnter = (e) => {
-        if(hasPrevPage) setStrokeWidth(6);
+        if (hasPrevPage) setStrokeWidth(6);
     }
 
     const handleClick = () => {
@@ -20,13 +20,15 @@ export default function ArrowLeft({ onClick, hasPrevPage }) {
     }
 
     return (
-        <btn className={`${styles.btnPaginador} ${styles.arrow} ${styles.left}`}
+        <btn
+            className={`${styles.btnPaginador} ${hasPrevPage ? styles.btnClickeable : styles.btnUnClickeable} ${styles.arrow} ${styles.left}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={() => handleClick()}
         >
             <svg className={styles.svgPaginator} width="60px" height="80px" viewBox="0 0 50 80">
                 <path
+                    className={styles.path}
                     fill="none"
                     stroke={hasPrevPage ? "#ffc107" : "#e0e0e0"}
                     strokeLinecap="round"

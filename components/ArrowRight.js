@@ -9,7 +9,7 @@ export default function ArrorRight({ onClick, hasNextPage }) {
     }
 
     const handleMouseEnter = (e) => {
-        if(hasNextPage) setStrokeWidth(6);
+        if (hasNextPage) setStrokeWidth(6);
     }
 
     const handleClick = () => {
@@ -21,7 +21,7 @@ export default function ArrorRight({ onClick, hasNextPage }) {
 
     return (
 
-        <btn className={`${styles.btnPaginador} ${styles.arrow} ${styles.right}`}
+        <btn className={`${styles.btnPaginador} ${hasNextPage ? styles.btnClickeable : styles.btnUnClickeable} ${styles.arrow} ${styles.right}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={() => handleClick()}
@@ -34,7 +34,7 @@ export default function ArrorRight({ onClick, hasNextPage }) {
                 className={styles.svgPaginator}
             >
                 <path
-
+                    className={styles.path}
                     fill="none"
                     stroke={hasNextPage ? "#ffc107" : "#e0e0e0"}
                     strokeLinecap="round"
