@@ -10,6 +10,8 @@ export default function CartaJugador(props) {
 
     const obtenerImagen = (clase) => {
 
+        if (jugador.selfie) return jugador.selfie;
+
         switch (clase) {
             case "Ballestera":
                 return '/crossbow.webp';
@@ -25,6 +27,10 @@ export default function CartaJugador(props) {
         }
     }
 
+    const imageLoader = ({ src, width, quality }) => {
+        return jugador.selfie || obtenerImagen(jugador.clase);
+    }
+
     const handleClickJugador = (e) => {
         e.preventDefault();
         router.push("/jugador/[id]", `/jugador/${jugador._id}`);
@@ -33,7 +39,27 @@ export default function CartaJugador(props) {
     return (
         <div className={styles.card} onDoubleClick={handleClickJugador}>
             <h2><mark>{jugador.nickName}</mark></h2>
-            <Image src={obtenerImagen(jugador.clase)} width={442} height={705} alt='Imagen del jugador' />
+            {
+                jugador.selfie
+                &&
+                <Image
+                    loader={imageLoader}
+                    src={`${jugador.nickName}.png`}
+                    width={442}
+                    height={705}
+                    alt='Imagen del jugador'
+                />
+            }
+            {
+                !jugador.selfie
+                &&
+                <Image
+                    src={obtenerImagen(jugador.clase)}
+                    width={442}
+                    height={705}
+                    alt='Imagen del jugador'
+                />
+            }
             <p><strong>Nivel:</strong> {jugador.nivel}</p>
             <p><strong>Poder:</strong> {jugador.poder}</p>
         </div>
