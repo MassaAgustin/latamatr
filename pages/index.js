@@ -13,10 +13,6 @@ export default function Home() {
 
   const [initialState, setInitialState] = useState(true);
   const [jugadores, setJugadores] = useState([]);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [hasPrevPage, setHasPrevPage] = useState(false);
-  const [hasNextPage, setHasNextPage] = useState(true);
 
   const [nickName, setNickName] = useState('');
   const [nivel, setNivel] = useState('');
@@ -29,6 +25,16 @@ export default function Home() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [page, setPage] = useState(1);
+  const [hasPrevPage, setHasPrevPage] = useState(false);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalData, setTotalData] = useState(1);
+  const [mediaPoder, setMediaPoder] = useState(1);
+
+
+
   const handleNextPage = () => {
     setPage(page + 1);
   }
@@ -37,14 +43,17 @@ export default function Home() {
     setPage(page - 1);
   }
 
-  const handleInfoJugadores = ({ jugadores, hasPrevPage, hasNextPage }) => {
+  const handleInfoJugadores = ({ jugadores, hasPrevPage, hasNextPage, totalData, totalPages, mediaPoder }) => {
+    handleSetPoder(mediaPoder);
     setJugadores(jugadores);
     setHasPrevPage(hasPrevPage);
     setHasNextPage(hasNextPage);
+    setTotalData(totalData);
+    setTotalPages(totalPages);
   }
 
   const handleRequestJugadores = async () => {
-    return obtenerJugadores({ page, limit })
+    return obtenerJugadores({ page, limit, nickName, nivel, poder, clan, clase })
       .then(handleInfoJugadores);
   }
 
@@ -76,6 +85,12 @@ export default function Home() {
     toggleMenuFilter();
   }
 
+  const handleSetPoder = (poder) => {
+    const formatPoder = new Intl.NumberFormat('es-AR', { compactDisplay: 'short', maximumFractionDigits: 0 }).format(poder);
+
+    setMediaPoder(formatPoder);
+  }
+
   const handleFirstLoad = () => {
     Promise.all(
       [
@@ -83,7 +98,10 @@ export default function Home() {
         getClanesYClases()
       ]
     )
-      .then(([{ jugadores, hasNextPage, hasPrevPage }, { clanes, clases }]) => {
+      .then(([{ jugadores, hasNextPage, hasPrevPage, totalPages, totalData, mediaPoder }, { clanes, clases }]) => {
+        setTotalPages(totalPages);
+        setTotalData(totalData);
+        handleSetPoder(mediaPoder);
         setJugadores(jugadores);
         setHasNextPage(hasNextPage);
         setHasPrevPage(hasPrevPage);
@@ -175,6 +193,12 @@ export default function Home() {
           }
         </div>
       </main >
+
+      <div className={styles['paginador__info']}>
+        <p>Media: {mediaPoder}</p>
+        <p>Pagina: {page} / {totalPages}</p>
+        <p>Total: {totalData}</p>
+      </div>
 
       <footer className={styles.footer}>
         <a
