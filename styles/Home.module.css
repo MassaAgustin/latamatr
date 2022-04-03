@@ -13,7 +13,8 @@
 .container input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 .menu input::-webkit-calendar-picker-indicator {
@@ -21,7 +22,8 @@
 }
 
 .container input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
+  /* Firefox */
 }
 
 .main {
@@ -254,7 +256,7 @@
   cursor: pointer;
 }
 
-.nav input:checked ~ .menu {
+.nav input:checked~.menu {
   width: 90vw;
 }
 
@@ -292,7 +294,7 @@
   transition: 0.5s;
 }
 
-.nav input:checked ~ span {
+.nav input:checked~span {
   background-color: #f974a1;
 }
 
@@ -300,14 +302,15 @@
   transform: translateY(-8px);
 }
 
-.nav input:checked ~ span:nth-child(2) {
+.nav input:checked~span:nth-child(2) {
   transform: translateY(0) rotate(-45deg);
 }
+
 .nav span:nth-child(3) {
   transform: translateY(8px);
 }
 
-.nav input:checked ~ span:nth-child(3) {
+.nav input:checked~span:nth-child(3) {
   transform: translateY(0) rotate(45deg);
 }
 
@@ -349,6 +352,95 @@
   gap: 2rem;
   justify-self: end;
 }
+
+
+.jugador {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+}
+
+.jugador__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.jugador__header h1 {
+  margin-bottom: 0;
+}
+
+.jugador__header h2 {
+  font-weight: 100;
+}
+
+.jugador__header__right {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
+
+.jugador__header__right:before {
+  position: absolute;
+  content: "Nivel";
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.jugador__header__left {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+}
+
+.jugador__header__left:before {
+  position: absolute;
+  content: "Poder";
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.jugador__footer {
+  position: absolute;
+  bottom: 2%;
+  right: 3%;
+}
+
+.jugador__footer__right p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.jugador__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jugador__body fieldset {
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 1.125rem;
+}
+
+.jugador__body legend {
+  border-radius: 1.125rem;
+  padding: 0 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: black;
+}
+
 
 @media (max-width: 600px) {
   .grid {

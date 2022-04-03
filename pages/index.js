@@ -170,7 +170,7 @@ export default function Home() {
         <div className={styles.grid}>
           {
             jugadores.map((jugador, index) => {
-              return <CartaJugador jugador={jugador} index={index} key={`card-jugador-${index}`} />
+              return <CartaJugador jugador={jugador} key={`card-jugador-${index}`} expanded={false} />
             })
           }
         </div>
